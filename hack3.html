@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WATER FOOTPRINT</title>
+    <script src="table2excel.js"></script>
+    <style>
+        .mn,th,td {
+            border: 1px solid blue;
+            border-collapse: collapse;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            padding-right:300px;
+            border-bottom: 1pt solid black;
+            padding-left:300px;
+            font-size: larger;
+            border-width:5px;
+            border-color: rgb(149, 206, 213);
+            
+            
+        }
+        .mn  
+         { 
+            background-image: url('https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2t5JTIwYmx1ZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: cursive;
+        }
+       
+        
+
+        body{
+            background-color: rgb(68, 83, 82);
+        }
+         h1{
+            font-family: cursive;
+            text-align: center;
+         }
+        
+        #para{
+            height:100px;
+        }
+        .sujal{
+            padding-bottom: 25px;
+        }
+        .submit{
+            padding-bottom: 30px;
+            padding-top: 30px;
+            
+        }
+
+        .vi{
+            background-color: antiquewhite;
+            padding-left: 25px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-family: sans-serif;
+           
+        }
+
+        .sh{
+            height: 25px;
+            width: 105px;
+            font-size: 20px;
+        }
+        .jk {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 10px;
+            align-items: center;
+            flex-direction: row;
+
+        }
+        .ab{
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 1px;
+            align-items: center;
+            flex-direction: row;
+            font-size: 13px;
+        }
+
+        .cd{
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 1px;
+            align-items: center;
+            flex-direction: row;
+
+        }
+        
+    </style>
+    <!-- Google Translate widget and initialization scripts -->
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        // Initialize the Google Translate widget
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en' },
+                'google_translate_element'
+            );
+        }
+
+        // Function to validate user input
+        function validateInput() {
+            const famInput = (document.getElementById("fam"));
+            const showerInput = document.getElementById("shower");
+            const bathInput = document.getElementById("bath");
+            const flushInput = document.getElementById("flush");
+            const kitchenInput = document.getElementById("kitchen");
+            const laundryInput = document.getElementById("laundry");
+            const greyWater=document.getElementById("grey")
+            const cars=document.getElementById("car")
+            let bikes=document.getElementById("bike")
+            let rain_barrel=document.getElementById("rb")
+            let meal_system=document.getElementById("veg")
+            var drive_length=document.getElementById("drive")
+
+
+            // Ensure the input is numeric and not empty
+            if(!isNumeric(drive_length.value)||drive_length.value<1||drive_length.value>3){
+                alert(" Entry is compulsory and only 1 ,2,3 enteries are allowed")
+                return false;
+            }
+            if(!isNumeric(meal_system.value)||meal_system.value<1||meal_system.value>3){
+                alert('Please enter either 1 ,2 or 3')
+                return false
+            }
+            if(!isNumeric(rain_barrel.value)||rain_barrel.value<1||rain_barrel.value>2){
+                alert("Please enter either 1 or 2")
+                return false
+            } 
+            if(!isNumeric(bikes.value)|| bikes.value<0){
+                alert("Please enter a number which is greater than equal to zero")
+                return false
+            }
+            if (!isNumeric(famInput.value)) {
+                alert("Please enter a numeric value for the number of household members.");
+                return false;
+            }
+
+            if (parseInt(famInput.value) < 1) {
+                alert("Please enter a valid number of household members (greater than or equal to 1).");
+                return false;
+            }
+
+            if (!isNumeric(showerInput.value) || showerInput.value < 1 || showerInput.value > 4) {
+                alert("Please enter a valid value for shower timings (1 to 4).");
+                return false;
+            }
+
+            if (!isNumeric(bathInput.value) || bathInput.value < 1 || bathInput.value > 3) {
+                alert("Please enter a valid value for bathroom sink usage (1 to 3).");
+                return false;
+            }
+
+            if (!isNumeric(flushInput.value) || flushInput.value < 1 || flushInput.value > 3) {
+                alert("Please enter a valid value for toilet flush usage (1 to 3).");
+                return false;
+            }
+
+            if (!isNumeric(kitchenInput.value) || kitchenInput.value < 1 || kitchenInput.value > 5) {
+                alert("Please enter a valid value for kitchen sink usage (1 to 5).");
+                return false;
+            }
+
+            if (!isNumeric(laundryInput.value) || laundryInput.value < 1 || laundryInput.value > 3) {
+                alert("Please enter a valid value for laundry usage (1 to 3).");
+                return false;
+            }
+            if(!isNumeric(greyWater.value)||greyWater.value<1||greyWater.value>2){
+                alert("Please enter either 1 or 2")
+                return false
+            }
+            if(!isNumeric(cars.value)||cars.value<0){
+                alert("Please enter from 0 onwards")
+                return false
+            }
+
+            return true;
+        }
+
+        // Function to check if a value is numeric
+      function isNumeric(value) {
+            return /^-?\d+$/.test(value);
+        }
+
+        // Function to handle the submission
+        function sujal() {
+            
+                if (validateInput()) {
+        // Proceed with your code if validation is successful
+        let n = parseInt(document.getElementById("fam").value);
+        let showers = parseInt(document.getElementById("shower").value);
+        let bath_sink = parseInt(document.getElementById("bath").value);
+        var toilet_sink=parseInt(document.getElementById("flush").value)
+        var kitchen_sink=parseInt(document.getElementById("kitchen").value)
+        var laundry_usage=parseInt(document.getElementById("laundry").value);
+        let grey_water=parseInt(document.getElementById("grey").value);
+        let Cars=parseInt(document.getElementById("car").value)
+        var bikeNumber=parseInt(document.getElementById("bike").value)
+        var rainBarrel=parseInt(document.getElementById("rb").value)
+        var k
+        var j
+        var mealSystem=parseInt(document.getElementById("veg").value)
+        let driveLength=parseInt(document.getElementById("drive").value)
+        let s
+        if(driveLength===1){
+            s=1
+            driveLength=3/4
+        }
+        else if(driveLength===2){
+            driveLength=3/2;
+            s=2
+        }
+        else{
+            s=3
+            driveLength=2
+        }
+        if(mealSystem===1){
+            j=1
+            mealSystem=600;
+        }
+        else if(mealSystem===2){
+            j=2;
+            mealSystem=833
+        }
+        else {
+            j=3;
+            mealSystem=1666;
+        }
+        if(rainBarrel===1){ 
+            k = -45/n
+            }
+        else 
+             k=0
+
+        let showersConsumption;
+        if (showers === 1) {
+            showersConsumption = 20;
+        } else if (showers === 2) {
+            showersConsumption = 30;
+        } else if (showers === 3) {
+            showersConsumption = 45;
+        } else {  showersConsumption = 60;
+        }
+
+        let bathConsumption;
+        if (bath_sink === 1) {
+            bathConsumption = 10;
+        } else if (bath_sink === 2) {
+            bathConsumption = 0;
+        } else {
+            bathConsumption = 5;
+        }
+        let toiletConsumption
+        if(toilet_sink===1){
+            toiletConsumption=10
+        }
+        else if(toilet_sink===2){
+            toiletConsumption=0
+        }
+        else{
+            toiletConsumption=5
+        }
+      let kitchenConsumption
+      if(kitchen_sink===1){
+        kitchenConsumption=5
+      }
+      else if(kitchen_sink===2){
+        kitchenConsumption=15
+      }
+      else if(kitchen_sink===3){
+        kitchenConsumption=17;
+      }
+      else if(kitchen_sink===4){
+        kitchenConsumption=20
+      }
+      else {
+        kitchenConsumption=30;
+      }
+      let laundryConsumption
+      if(laundry_usage===1){
+        laundryConsumption=3
+      }
+      else if(laundry_usage===2){
+        laundryConsumption=5;
+      }
+      else{
+        laundryConsumption=7
+      }
+      let greyWaterSystem
+      if(grey_water===1)
+      greyWaterSystem=-7
+    else
+    greyWaterSystem=0
+var washCar=(Cars*30)/n
+var washBike=(bikeNumber*30)/n
+var footPrint=(showersConsumption+bathConsumption+toiletConsumption+laundryConsumption+greyWaterSystem+kitchenConsumption+washCar+washBike+k+mealSystem+driveLength)
+var avgFamilyFootPrint=n*footPrint
+
+   
+        // Display the translated results
+        document.getElementById("translatedResults").innerHTML =
+            `<br><h1>HERE YOU GO :</h1></br>
+            Number of family members in user home is ${n}<br> Choosen Shower option is ${showers}<br>
+            Consumption of water in showers is ${((showers===1)? 'under 10 minutes':((showers===2)? "between 11-20 minutes":((showers===3)?
+             'between 21-30 minutes': "above 30 minutes")))}<br> Choosen value for usage of bathroom sink is ${bath_sink}<br> Average Consumption water in showers 
+            is ${showersConsumption} Gallons per day <br> Consumption of water in bathroom sink
+            is ${(bath_sink === 1) ? "high" : ((bath_sink === 2) ? "low" : "average")} <br> Average consumption of water  by the user in bathroom sink 
+            is ${bathConsumption} gallons per day <br> Choosen toilet consumption option is ${toilet_sink}
+            <br> Consumption of water in toilet by the user is  ${(toilet_sink===1)? 'high':((toilet_sink===2)? "low":"average")}
+            <br>Average consumtion of water in toilet by user is ${toiletConsumption} Gallons per day <br> Choosen kitchen water consumption 
+            by the user is ${ kitchen_sink}<br> Consumption of water by user in kitchen sink is ${(kitchen_sink===1)? "for 10 minutes": 
+            ((kitchen_sink===2)? "for 11 to 20 minutes":((kitchen_sink===3)?"for 21 to 30 minutes":((kitchen_sink===4)?"for 31 to 40 minutes":"for above 40 minutes")))}
+            <br>Choosen option by user for in laundry usage option list is ${laundry_usage}<br>User on average washes ${(laundry_usage===1)? "1 cloth":
+            ((laundry_usage===2)?"2 to 3 clothes":"above 3 colthes")} per day<br> On an average user consumes ${laundryConsumption} Galloons per day for laundry
+            <br>User ${(grey_water===1)? "have":"doesnot have"} grey Water system in his house <br>Number of cars user have is
+            ${Cars}<br> Number of bikes user have is ${bikeNumber}<br>User is accounted for ${washCar} galloons per day for washing car/cars in family
+            <br>User is accounted for ${washBike} galloons per day for washing bike/bikes in the family<br>User ${(rainBarrel===1)? "have": 'doesnot have'} rain barrel system in his house<br> 
+           ${(rainBarrel===1)? "Rain barrel supplies additional water for user":"<br>"} <br>User is a ${(j===1)? 'vegan':((j===2)?"vegetarian":"non vegetarian")}<br>On an average User accounts for ${mealSystem} galloons per day
+            in consumption of food <br> User drives for ${(s===1)? "1":((s==2)?'2 to 3':"above 3")} miles on an average per day <br>User accounts for consumption  of ${driveLength} galloons per day on an average <br>Water footprint of the user is ${footPrint} galloona per day
+            <br>Average family water footprint of the user is ${avgFamilyFootPrint} galloons per day
+            <br><br> 
+           <table id="example-table" class="jk" style="padding-left:0px";>
+            <tr><th class="ab">n</th><th class="ab">showersConsumption</th><th class="ab">bathConsumption</th><th class="ab">toiletConsumption </th>
+            <th class="ab">kitchenConsumption</th><th class="ab"> laundryConsumption</th><th class="ab">greyWaterSystem</th><th class="ab">washCar</th><th class="ab">washBike</th>
+            <th class="ab">rainbarrel</th><th class="ab"> mealSystem</th><th class="ab">driveLength</th><th class="ab">footPrint</th><th class="ab"> avgFamilyFootPrint</th></tr>
+        
+            <tr><td class="cd">${n}</td><td class="cd">${showersConsumption}</td><td class="cd">${bathConsumption}</td><td class="cd">${toiletConsumption} </td>
+                <td class="cd">${kitchenConsumption}</td><td class="cd"> ${laundryConsumption}</td><td class="cd">${greyWaterSystem}</td><td class="cd">${washCar}</td><td class="cd">${washBike}</td>
+                <td class="cd">${k}</td><td class="cd"> ${mealSystem}</td><td class="cd">${driveLength}</td><td class="cd">${footPrint}</td><td class="cd"> ${avgFamilyFootPrint}</td></tr></table><br><form><button id="downloadexcel">export to excel</button></form>
+
+                `;
+        // Translate the results and display them using Google Translate 
+        translatedResults();
+    }
+      
+    }
+    
+    
+        function sujalFlash(){
+             document.getElementById("translatedResults").innerHTML="  "
+        }
+
+         
+        document.getElementById("downloadexcel").addEventListener('click',function(){
+            var table2excel = new Table2excel();
+            table2excel.export(document.querySelectorAll("#example-table"));
+        });
+
+    </script>
+</head>
+<body>
+     
+
+    <!-- Google Translate widget container -->
+    <div id="google_translate_element"></div>
+<table align="center" class="mn">
+    <tr>
+    <th style="padding-left: 445px; padding-right:445px; padding-top:20px; padding-bottom:20px;">CALCULATION OF WATER FOOTPRINT</th>
+     </tr>
+</table>
+    <form>
+        <table align="center" class="mn">
+            <tr>    
+                <td id="para"> <label>1. Enter the number of household members (greater than or equal 1):</label>
+                    <!-- Use type="number" to ensure numeric input -->
+                    <input type="number" min="1" id="fam"  style=" height: 25px; width: 100px;font-size: 20px;"></td>
+            </tr>
+            <tr>
+                <td class="sujal">
+                    <p>
+                        2. Shower timings <br><br>
+                        Enter 1 if your shower timings is under 10 minutes<br><br>
+                        Enter 2 if your shower timings is between 11 to 20 minutes<br><br>
+                        Enter 3 if your shower timings is between 21 to 30 minutes<br><br>
+                        Enter 4 if your shower timings is above 30 minutes <br><br>
+                    </p>
+                    <label>Enter or Choose:</label>
+                    <!-- Use type="number" to ensure numeric input -->
+                    <input type="number" min="1" max="4" id="shower" class="sh" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        3.Usage of water in Bathroom Sink<br><br>
+                        Choose level of water you use in your bathroom Sink<br><br>
+                        Choose 1 for High<br><br>
+                        Choose 2 for low<br><br>
+                        Choose 3 for average<br><br>
+                        <label>Choose:</label>
+                        <input type="number" min="1" max="3"  id="bath" class="sh" required>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        4. Usage of water in Toilet flushes by user<br><br>
+                        If  High choose 1<br><br>
+                        If Low Choose 2<br><br>
+                        If average Choose 3<br><br>
+                        <label>Choose:</label>
+                        <input type="number" min="1" max="3"  id="flush" class="sh" required>
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        5. Usage of water in kitchen sink by the user<br><br>
+                        Choose 1 if it is under 10 minutes<br><br>
+                        Choose 2 if it is between 11-20 minutes<br><br>
+                        Choose 3 if it is between 21-30 minutes<br><br>
+                        Choose 4 if it is between 31-40 minutes<br><br>
+                        Choose 5 if it is above 40 minutes<br><br>
+                        <label>Choose:</label> <input type="number" min="1" max="5" id="kitchen" class="sh" required>
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        6.Choose number of clothes you do laundry per day<br><br>
+                        Choose 1 for one cloth<br><br>
+                        Choose 2 for 2 to 3 clothes<br><br>
+                        Choose 3 for above 3 clothes<br><br>
+                        <label>Choose:</label> <input type="number" min="1" max="3" id="laundry" class="sh" required>
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="sujal">
+                    7.Does your home consists of grey watersystem<br><br>
+                    Choose 1 for yes<br><br>
+                    Choose 2 for no<br><br>
+                    <label>Choose:</label>
+                    <input type="number" min="1" max="2" id="grey" class="sh" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label>8.How many cars you have:</label>
+                        <input type="number" min="0" id="car" class="sh" required>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label>9.How many bikes you have:</label>
+                        <input type="number" min="0" id="bike" class="sh" required>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="sujal">
+                    10.Does Your home consists of rain barrel system<br><br>
+                    Choose 1 for yes<br><br>
+                    Choose 2 for no<br><br>
+                    <label>Choose:</label>
+                    <input type="number" min="1" max="2" id="rb" class="sh" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p> 
+                    11.Choose your method of meal consumption<br><br>
+                    Choose 1 for vegan<br><br>
+                    Choose 2 for vegetarian<br><br>
+                    Choose 3 for non vegetarian <br><br>
+                    <label>Choose:</label> <input type="number" min="1" max="3" id="veg" class="sh" required>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        12.How much average distance you drive per day<br><br>
+                        Choose 1 if you drive for 1 mile<br><br>
+                        Choose 2 if you drive for 2 to 3 miles<br><br>
+                        Choose 3 if you drive for more than 3 miles<br><br>
+                        <label>Choose:</label><input type="number" min="1" max="3" id="drive" class="sh" required>
+
+                    </p>
+                </td>
+            <tr>
+                <td class="submit" align="center">
+                    <input type="button" value="submit"  style="font-size:35px;" onclick="sujal()">
+              &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  <input type="reset" onclick="sujalFlash()" style="font-size:35px; font-family:cursive;" value="reset">
+                </td>
+                <!-- <button id="downloadexcel">export to excel</button>    -->
+            </tr>
+                             
+                <!-- Container for translated results -->
+    
+        </table>
+        <!-- <script>
+            document.getElementById("downloadexcel").addEventListener('click',function(){
+                var table2excel = new Table2Excel();
+                table2excel.export(document.querySelectorAll(".jk"));
+            });
+        </script> -->
+
+        <div id="translatedResults" class="vi"></div>
+
+    </form>
+    
+   
+</body>
+</html>
+ 
